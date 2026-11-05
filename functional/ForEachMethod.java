@@ -16,13 +16,14 @@ public class ForEachMethod {
        /* for(String str:list){
             System.out.println(str);
         }*/
-       // list.stream().forEach(str->System.out.println(str));
-        list.stream().forEach(System.out::println);
+       list.stream().filter(str->str.startsWith("M")).forEach(str->System.out.println(str));
+       // list.stream().forEach(System.out::println);
         Map<Integer,String> map=new HashMap<>();
         map.put(1,"Sateesh");
         map.put(2,"Ramesh");
         map.put(3,"Raju");
-        map.forEach((k,v)->System.out.println(k+" "+v));
+        //map.forEach((k,v)->System.out.println(k+" "+v));
+        map.entrySet().stream().filter(entry->entry.getKey()%2==0).forEach(entry->System.out.println(entry.getKey()+" "+entry.getValue()));
     }
 
 }
