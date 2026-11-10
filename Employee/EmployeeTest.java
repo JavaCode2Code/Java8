@@ -13,10 +13,10 @@ public class EmployeeTest {
                 DataBase.getEmployeeList().stream().filter(emp->emp.getSalary()< 70000).collect(Collectors.toList());
     }
     public static void main(String[] args) {
-   System.out.println(eligbleForTax("non tax"));
+   //System.out.println(eligbleForTax("non tax"));
         Map<String, Optional<Employee>> map= DataBase.getEmployeeList().stream().collect(Collectors.groupingBy(Employee::getDept,Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
      map.forEach((dept,emp)->{
-         System.out.println(dept + ":" + emp.get().getName() + " " + emp.get().getSalary());
+       //  System.out.println(dept + ":" + emp.get().getName() + " " + emp.get().getSalary());
      });
 
 
@@ -39,9 +39,17 @@ public class EmployeeTest {
         //getDept
         // listEmployee.stream().sorted(Comparator.comparing(Employee::getDept)).forEach(System.out::println);
 
-        Stream<Employee> listEmployees = listEmployee.stream().sorted(Comparator.comparing(Employee::getDept));
+        //Stream<Employee> listEmployees = listEmployee.stream().sorted(Comparator.comparing(Employee::getDept));
 
-        listEmployee.stream().sorted(Comparator.comparing(Employee::getName));
+      //  listEmployee.stream().sorted(Comparator.comparing(Employee::getName));
         //   System.out.println(listEmployees.collect(Collectors.toList()));
+
+        //map
+ //listEmployee.stream().map(Employee::getProjects).forEach(System.out::println);
+        listEmployee.stream().map(Employee::getProjects).flatMap(p->p.stream().distinct()).forEach(System.out::println);
+
+        // System.out.println(listEmployee);
+
     }
+
 }
