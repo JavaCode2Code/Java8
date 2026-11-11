@@ -18,19 +18,27 @@ public class SortedMapModernway {
         map.put(8, "Lenovo");
         List<Map.Entry<Integer, String>> entries = new ArrayList<>(map.entrySet());
 
+
+
+
       /*  Collections.sort(entries, ( o1, o2) -> {
                 return o1.getKey().compareTo(o2.getKey());
             });
         */
+
+
 
        /* for (Map.Entry<Integer, String> entry : entries) {
 
             System.out.println(entry.getKey() + "  " + entry.getValue());
         }*/
 
-     /*   Collections.sort(entries,(o1,o2) ->{
+
+
+     /*  Collections.sort(entries,(o1,o2) ->{
                 return o1.getValue().compareTo(o2.getValue());
             });
+
 
         for (Map.Entry<Integer, String> entry : entries) {
 
@@ -38,15 +46,20 @@ public class SortedMapModernway {
         }*/
 
 
+
         //map.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry ->System.out.println(entry.getKey()+"  "+entry.getValue()));
 
         //comparingByValue
         map.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
+
+
         Map<Employee, Integer> mapEmployee = new TreeMap<>((Employee o1, Employee o2) ->
         {
             return (int) (o2.getSalary() - o1.getSalary());
         });
+
+
 
         Project p1 = new Project("P001", "Alpha", "ABC Corp", "Alice");
         Project p2 = new Project("P002", "Beta", "XYZ Ltd", "Bob");
@@ -62,13 +75,20 @@ public class SortedMapModernway {
         mapEmployee.put(e2, 90);
         mapEmployee.put(e3, 100);
         mapEmployee.put(e4, 110);
-       // System.out.println(mapEmployee);
-//mapEmployee.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee::getSalary)));
+        // System.out.println(mapEmployee);
+
+
+
+
+        //mapEmployee.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee::getSalary)));
 
         mapEmployee.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee::getSalary
         ).reversed()));
+
+
         mapEmployee.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee::getDept
         ).reversed()));
+
         System.out.println(mapEmployee);
     }
 }

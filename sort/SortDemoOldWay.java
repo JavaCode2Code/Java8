@@ -4,7 +4,6 @@ import com.Employee.DataBase;
 import com.Employee.Employee;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -27,10 +26,10 @@ public class SortDemoOldWay {
         list.add(12);
         list.add(4);
 
-        List<Employee> listEmployee= DataBase.getEmployeeList();
-       // Collections.sort(listEmployee, new Mycomarator());
-     //   Collections.sort(list);
-      //  Collections.reverse(listEmployee);
+        List<Employee> listEmployee = DataBase.getEmployeeList();
+        // Collections.sort(listEmployee, new Mycomarator());
+        //   Collections.sort(list);
+        //  Collections.reverse(listEmployee);
 
         System.out.println(list);
     }

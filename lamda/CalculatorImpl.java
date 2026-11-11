@@ -8,12 +8,18 @@ public class CalculatorImpl {
 
         calculator.add(5, 10);*/
 
+
+
        /* Calculator calculator=(input)->{System.out.println(input*input*input);};
            calculator.cube(5);*/
-        Calculator calculator=(a,b)->{
-            return (a-b);
+
+
+        Calculator calculator = (a, b) -> {
+            return (a - b);
         };
-        int result = calculator.subtract(8,2);
+
+
+        int result = calculator.subtract(8, 2);
         System.out.println(result);
     }
 }
