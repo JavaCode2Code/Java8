@@ -29,11 +29,11 @@ public class BiPredicateDemo  {
 
 
        boolean valu= biPredicate3.and(biPredicate2).test("Papa","papa");
-        //System.out.println(valu);
+        System.out.println(valu);
 
 
 
-        boolean value= biPredicate3.or(biPredicate2).test("Papa","papa");
+        boolean value= biPredicate3.or(biPredicate2).test("Papa","sapa");
         System.out.println(value);
 
     }
