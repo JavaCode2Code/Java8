@@ -1,24 +1,32 @@
 # CompletableFuture: `runAsync` vs `supplyAsync`
 
+Both methods execute asynchronous work, but they differ in what kind of task they represent and whether they produce a value.
+
 ## `runAsync`
 
-- **Takes:** `Runnable` — no input and no return value
-- **Returns:** `CompletableFuture<Void>`
-- **`get()` / `join()` gives:** `null`
-- **Use for:** Side effects such as logging, saving data, or sending an email
+- Accepts a `Runnable`.
+- A `Runnable` has no input and does not return a value.
+- Returns `CompletableFuture<Void>`.
+- `get()` or `join()` returns `null` because there is no result to retrieve.
+- Best suited for side effects such as logging, saving data, or sending email.
 
 ## `supplyAsync`
 
-- **Takes:** `Supplier<U>` — no input and returns a value
-- **Returns:** `CompletableFuture<U>`
-- **`get()` / `join()` gives:** The computed result
-- **Use for:** Computing a value, such as a database query, API call, or calculation
+- Accepts a `Supplier<U>`.
+- A `Supplier<U>` takes no input but produces a value of type `U`.
+- Returns `CompletableFuture<U>`.
+- `get()` or `join()` returns the computed value.
+- Best suited for tasks that compute or fetch data, such as database queries, API calls, or calculations.
 
 ## Core difference
 
-Use `runAsync` when the asynchronous task does not need to return a result. Use `supplyAsync` when it needs to produce a value.
-Theory behind it
-Runnable.run() is void, so a future built from it has nothing to carry. That is why it is CompletableFuture<Void>.
-Supplier.get() returns a value, so the future carries that value as its result, and you can chain on it with thenApply, thenAccept, thenCombine, etc.
-Both run on ForkJoinPool.commonPool() by default (daemon threads), or on a custom Executor if you pass one as the second argument.
-If the task throws, the future completes exceptionally in both cases. You see it via exceptionally, handle, or as a CompletionException from join() (an ExecutionException from get()).
+`runAsync` is used for fire-and-forget work where the task is an action rather than a computation. It has no meaningful result.
+
+`supplyAsync` is used when the task is expected to produce a value that will be consumed later by the program.
+
+## Implementation notes
+
+- A `Runnable` calls `run()`, which returns no value, so the future is `CompletableFuture<Void>`.
+- A `Supplier<U>` calls `get()`, which returns a value, so the future carries that value and can be chained using methods such as `thenApply`, `thenAccept`, and `thenCombine`.
+- By default, both run on the common `ForkJoinPool` unless you provide a custom `Executor`.
+- If the task throws an exception, both futures complete exceptionally and can be handled using `exceptionally`, `handle`, or by catching `CompletionException` from `join()` / `ExecutionException` from `get()`.
